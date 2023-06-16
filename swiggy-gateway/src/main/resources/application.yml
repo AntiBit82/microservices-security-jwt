@@ -11,6 +11,10 @@ spring:
         uri: lb://RESTAURANT-SERVICE
         predicates:
           - Path=/restaurant/**
+      - id: auth-service
+        uri: lb://AUTH-SERVICE
+        predicates:
+          - Path=/auth/**
 
 
 eureka:
