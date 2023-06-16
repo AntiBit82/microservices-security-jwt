@@ -2,20 +2,23 @@ spring:
   application.name: SWIGGY-GATEWAY
   cloud:
     gateway:
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
       routes:
-      - id: swiggy-app
-        uri: lb://SWIGGY-APP
-        predicates:
-          - Path=/swiggy/**
-      - id: restaurant-service
-        uri: lb://RESTAURANT-SERVICE
-        predicates:
-          - Path=/restaurant/**
-      - id: auth-service
-        uri: lb://AUTH-SERVICE
-        predicates:
-          - Path=/auth/**
-
+        - id: identity-service
+          uri: lb://IDENTITY-SERVICE
+          predicates:
+            - Path=/auth/**
+        - id: swiggy-app
+          uri: lb://SWIGGY-APP
+          predicates:
+            - Path=/swiggy/**
+        - id: restaurant-service
+          uri: lb://RESTAURANT-SERVICE
+          predicates:
+            - Path=/restaurant/**
 
 eureka:
   client:
